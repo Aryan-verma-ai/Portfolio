@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Verma | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="style.css">
+    <script>
+      // Color Palette based on your provided image
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'bg-primary-dark': '#1A0C38', // Deep Purple
+              'accent-purple': '#4E338A',  // Medium Purple for the text box
+              'text-light': '#F0F0F0',    // Off-White
+              'text-subtle': '#A79DC4',   // Light Purple for subtext
+              'glow-blue': '#00FFFF',      // Electric Blue for highlights
+              'ui-bg': '#241E4E',        // Dark Purple-Gray for UI cards
+            },
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-bg-primary-dark font-sans text-text-light">
+
+    <div id="tsparticles"></div>
+    <div id="custom-cursor" class="fixed rounded-full pointer-events-none z-50 transition-all duration-300 ease-out"></div>
+
+    <main class="relative z-10">
+
+        <section class="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden">
+            <div class="absolute top-6 right-6 text-sm text-text-subtle opacity-70">
+                Aryan Verma | Portfolio
+            </div>
+            <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20">
+                <div class="relative w-60 h-60 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full flex-shrink-0" data-hoverable>
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-glow-blue to-accent-purple animate-spin-slow"></div>
+                    <div class="relative w-full h-full rounded-full p-2">
+                        <img src="./images/img1.jpeg" alt="Aryan Verma" 
+                             class="w-full h-full object-cover rounded-full shadow-2xl">
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-accent-purple/70 to-bg-primary-dark/60 backdrop-blur-md p-8 md:p-10 rounded-2xl shadow-2xl max-w-lg border border-white/10 space-y-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight" data-hoverable>
+                        Hi There 👋! I'm <br>
+                        <span class="text-glow-blue">Aryan</span>
+                        <br> Verma
+                    </h1>
+                    <p class="text-base text-text-subtle leading-relaxed" data-hoverable>
+                        Specializing in user-focused design, I build responsive interfaces fueled by open-source collaboration.
+                    </p>
+                    <div class="flex space-x-6 pt-4 text-glow-blue font-bold text-lg" data-hoverable>
+                        <a href="https://github.com/Aryan-verma-ai" class="hover:text-white transition-colors duration-200">GitHub</a>
+                        <a href="https://www.linkedin.com/in/aryan-verma-638594320/" class="hover:text-white transition-colors duration-200">LinkedIn</a>
+                        <a href="https://www.instagram.com/tf.aryannnnnnn/?next=%2F" class="hover:text-white transition-colors duration-200">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 overflow-hidden">
+            <div class="container mx-auto px-6 md:px-10 lg:px-16">
+                <h2 class="text-5xl font-black mb-12 relative" data-aos="fade-right" data-hoverable>
+                    Tech Stack
+                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
+                </h2>
+                <div class="grid grid-cols-4 sm:grid-cols-6 gap-4 text-center">
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="HTML5">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="CSS3">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="JavaScript">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Bootstrap">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="C++">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Django">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="SQLite">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Git">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="GitHub">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Vercel">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" alt="Vercel" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Visual Studio Code">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code" class="h-12 w-12 object-contain">
+                    </div>
+                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Python">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="h-12 w-12 object-contain">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 overflow-hidden">
+            <div class="container mx-auto px-6 md:px-10 lg:px-16">
+                <h2 class="text-5xl font-black mb-12 relative" data-aos="fade-right" data-hoverable>
+                    Projects
+                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
+                </h2>
+                <div class="relative w-full group">
+                    <div id="project-carousel" class="flex overflow-hidden relative w-full h-96 md:h-128 lg:h-144 rounded-2xl">
+                        </div>
+                    <button id="prev-project" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full transition-opacity duration-300 z-10" data-hoverable>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="next-project" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full transition-opacity duration-300 z-10" data-hoverable>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="from-accent-purple/20 to-bg-primary-dark/10">
+            <div class="container mx-auto px-6 md:px-10 lg:px-16">
+                <h2 class="text-5xl font-black mb-12 relative text-text-light" data-aos="fade-right" data-hoverable>
+                    Image Gallery
+                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
+                </h2>
+                <div class="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
+                    <div class="relative w-full lg:w-3/5 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-105 group" data-aos="fade-right" data-hoverable>
+                        <img id="mainGalleryImage" src="./images/img1.jpeg" alt="Gallery Image" class="w-full h-auto object-cover rounded-2xl border border-white/10">
+                        <button id="prevImage" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button id="nextImage" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="w-full lg:w-2/5 space-y-6 flex flex-col justify-between h-full">
+                        <div class="bg-gradient-to-br from-accent-purple/70 to-bg-primary-dark/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/10" data-aos="fade-left" data-hoverable>
+                            <h3 id="galleryTitle" class="text-3xl md:text-4xl font-bold text-glow-blue mb-4">Volunteer at Techacks4.0 36hrs Hackathon</h3>
+                            <p id="galleryDescription" class="text-text-subtle leading-relaxed">Contributed as a dedicated volunteer at the 36-hour Techacks4.0 hackathon.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-24 text-center overflow-hidden">
+            <div class="container mx-auto px-6 md:px-10 lg:px-16 space-y-4">
+                <h3 class="text-4xl font-bold" data-aos="fade-up" data-hoverable>Thank you for viewing!</h3>
+                <p class="text-text-subtle" data-aos="fade-up" data-aos-delay="100" data-hoverable>Stay in touch.</p>
+                <div class="flex justify-center space-x-6 text-glow-blue font-bold" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://github.com/Aryan-verma-ai" class="hover:text-white transition-colors duration-200" data-hoverable>GitHub</a>
+                    <a href="https://www.linkedin.com/in/aryan-verma-638594320/" class="hover:text-white transition-colors duration-200" data-hoverable>LinkedIn</a>
+                    <a href="https://www.instagram.com/tf.aryannnnnnn/?next=%2F" class="hover:text-white transition-colors duration-200" data-hoverable>Instagram</a>
+                </div>
+                <img src="./images/avatar1.png" alt="Avatar" class="mx-auto mt-8 h-32" data-aos="zoom-in" data-aos-delay="300" data-hoverable/>
+            </div>
+        </footer>
+
+    </main>
+
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden backdrop-filter backdrop-blur-md bg-black/60">
+        <div class="relative w-full max-w-4xl mx-4 bg-ui-bg rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]">
+            <button id="close-modal" class="absolute top-4 right-4 text-text-light hover:text-white text-3xl font-bold z-20" data-hoverable>&times;</button>
+            <div class="p-8 space-y-6">
+                <img id="modal-image" src="" alt="Project Image" class="w-full h-auto rounded-lg mb-4 border border-white/10">
+                <div class="space-y-4">
+                    <h3 id="modal-title" class="text-4xl font-bold text-glow-blue"></h3>
+                    <p id="modal-description" class="text-text-subtle leading-relaxed"></p>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 text-glow-blue font-bold text-lg pt-4">
+                    <a id="modal-github" href="#" target="_blank" class="hover:text-white transition-colors duration-200" data-hoverable>GitHub Repo</a>
+                    <a id="modal-live" href="#" target="_blank" class="hover:text-white transition-colors duration-200" data-hoverable>Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: false,
+        mirror: true,
+      });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
