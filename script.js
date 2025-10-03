@@ -1,4 +1,6 @@
+// ===================================================================================
 // TSPARTICLES - ANIMATED BACKGROUND LOGIC
+// ===================================================================================
 tsParticles.load("tsparticles", {
     fpsLimit: 60,
     particles: {
@@ -26,7 +28,9 @@ tsParticles.load("tsparticles", {
 });
 
 
+// ===================================================================================
 // CUSTOM CURSOR LOGIC
+// ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const cursor = document.getElementById('custom-cursor');
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
@@ -101,14 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// ===================================================================================
 // IMAGE GALLERY LOGIC
+// ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
 
     const galleryItems = [
         {
-            image: './images/techacks1.jpeg',
-            title: 'Volunteer at Techacks4.0 36hrs Hackathon',
-            description: 'Contributed as a dedicated volunteer at the 36-hour Techacks4.0 hackathon.'
+            image: './images/img2.JPG',
+            title: 'Participant – Rudiments of AI Program',
+            description: 'Successfully completed a 3-day "Rudiments of AI" program conducted by Chancellor Ashok Chitkara, scoring 99 out of 100..'
         },
         {
             image: './images/techacks2.jpeg',
@@ -119,7 +125,22 @@ document.addEventListener('DOMContentLoaded', () => {
             image: './images/techacks3.jpeg',
             title: 'Techacks Organizing Team',
             description: 'The dedicated organizing team behind the Techacks event.'
-       
+        },
+        {
+            image: './images/techacks4.jpeg',
+            title: 'Learning Session',
+            description: 'Engaging in a collaborative learning session during the hackathon.'
+        },
+        {
+            image: './images/techacks5.jpeg',
+            title: 'Award Ceremony',
+            description: 'Receiving an award for contributions or participation at the event.'
+        },
+        {
+            image: './images/techacks6.jpeg',
+            title: 'Team Brainstorming',
+            description: 'Intense brainstorming session with the team, developing innovative ideas.'
+        },
     ];
 
     const mainImage = document.getElementById('mainGalleryImage');
@@ -151,8 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+// ===================================================================================
 // PROJECT CAROUSEL & MODAL LOGIC
+// ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. Project Data ---
@@ -164,7 +186,21 @@ document.addEventListener('DOMContentLoaded', () => {
             github: 'https://github.com/your-username/sportify',
             live: 'https://sportify-demo.vercel.app'
         },
-        
+        {
+            image: './images/techacks1.jpeg',
+            title: 'Techacks - Hackathon Volunteer',
+            description: 'A dedicated volunteer at the 36-hour Techacks4.0 hackathon, supporting event logistics and participant needs.',
+            github: 'https://github.com/your-username/techacks',
+            live: '#'
+        },
+        {
+            image: './images/another-project-image.jpg',
+            title: 'My Awesome Project',
+            description: 'This is a great example of a web application I built using modern technologies. It solves a real-world problem.',
+            github: 'https://github.com/your-username/another-project',
+            live: 'https://another-project-demo.vercel.app'
+        }
+        // Add more project objects here as needed
     ];
 
     // --- 2. DOM Elements ---
