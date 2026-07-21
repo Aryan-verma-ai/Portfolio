@@ -37,24 +37,61 @@ main {
     animation: spin-slow 15s linear infinite;
 }
 
-/* Certificates marquee: auto-scrolls left-to-right, pauses on hover */
+/* Certificates: native horizontal scroller so the user can drag/swipe/click through it manually */
 .cert-marquee {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
     -webkit-mask-image: linear-gradient(to right, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
     mask-image: linear-gradient(to right, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cert-marquee::-webkit-scrollbar {
+    display: none;
+}
+
+.cert-marquee.dragging {
+    cursor: grabbing;
 }
 
 .cert-track {
-    animation: cert-scroll-ltr 40s linear infinite;
+    width: max-content;
 }
 
-.cert-marquee:hover .cert-track {
+/* Each card gently breathes with a cyan glow; hovering freezes and intensifies it */
+.cert-card {
+    animation: cert-glow-pulse 3.5s ease-in-out infinite;
+}
+
+.cert-card:hover {
     animation-play-state: paused;
+    box-shadow: 0 0 28px rgba(0, 255, 255, 0.45);
 }
 
-@keyframes cert-scroll-ltr {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0%); }
+@keyframes cert-glow-pulse {
+    0%, 100% { box-shadow: 0 0 0px rgba(0, 255, 255, 0); }
+    50% { box-shadow: 0 0 14px rgba(0, 255, 255, 0.25); }
+}
+
+/* Diagonal light sweep across the card on hover */
+.cert-shine {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.cert-card:hover .cert-shine {
+    left: 125%;
 }
 
 /* Gentle sway for the hanging ID badge, like it's dangling from a lanyard */

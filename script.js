@@ -10,7 +10,7 @@ tsParticles.load("tsparticles", {
         opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
         size: { value: 3, random: true, anim: { enable: false } },
         line_linked: { enable: true, distance: 150, color: "#00FFFF", opacity: 0.4, width: 1 }, // Line color
-        move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false } }
+        move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false } }
     },
     interactivity: {
         detect_on: "canvas",
@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isIdle) {
             isIdle = false;
-            velocityX = 0;
-            velocityY = 0;
+            velocityX = 5;
+            velocityY = 5;
         }
         
         clearTimeout(idleTimeout);
@@ -112,23 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Edit this array to add/remove/update your certificates.
     // "image" should point to a scanned/exported image of the certificate.
-    const placeholderImages = ['./images/img1.jpeg', './images/sportify.png', './images/avatar1.png'];
     const certificates = [
         { image: './images/certificates/ai-for-marketing.png', title: 'AI for Marketing', issuer: 'Emory University (Coursera) • Aug 6, 2025', verify: 'https://coursera.org/verify/specialization/9PG59EFYQQ2R' },
         { image: './images/certificates/design-thinking.png', title: 'Design Thinking', issuer: 'University of Virginia Darden School of Business (Coursera) • Dec 17, 2024', verify: 'https://coursera.org/verify/specialization/V3QM2W6M0JDE' },
         { image: './images/certificates/esg-investing.png', title: 'ESG Investing: Financial Decisions in Flux', issuer: 'Interactive Brokers (Coursera) • Jan 2, 2025', verify: 'https://coursera.org/verify/specialization/Q8ZQ92HEC8HD' },
         { image: './images/certificates/natural-disaster-climate-risk.png', title: 'Natural Disaster and Climate Change Risk Assessment', issuer: 'BIDAcademy (Coursera) • Dec 2, 2024', verify: 'https://coursera.org/verify/specialization/TO9W1ANM4BL6' },
         { image: './images/certificates/social-media-marketing.png', title: 'Social Media Marketing in Practice', issuer: 'Digital Marketing Institute (Coursera) • Dec 2, 2024', verify: 'https://coursera.org/verify/specialization/ABN1F9QSYVLL' },
-        { image: placeholderImages[0], title: 'Certificate Title 6', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[1], title: 'Certificate Title 7', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[2], title: 'Certificate Title 8', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[0], title: 'Certificate Title 9', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[1], title: 'Certificate Title 10', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[2], title: 'Certificate Title 11', issuer: 'Issuing Organization • Date', verify: '#' },
-        { image: placeholderImages[0], title: 'Certificate Title 12', issuer: 'Issuing Organization • Date', verify: '#' }
+        { image: './images/certificates/azure-ai-fundamentals.png', title: 'Azure AI Fundamentals', issuer: 'Microsoft Certified • Nov 21, 2024', verify: 'https://verify.certiport.com/Uxkw-s4wW' },
+        { image: './images/certificates/azure-fundamentals.png', title: 'Azure Fundamentals', issuer: 'Microsoft Certified • Jun 27, 2025', verify: 'https://verify.certiport.com/2Qnv-XMSn' }
     ];
 
     const track = document.getElementById('certificates-track');
+    const scroller = document.getElementById('certificates-scroll');
+    const prevBtn = document.getElementById('cert-prev');
+    const nextBtn = document.getElementById('cert-next');
     const modal = document.getElementById('certificate-modal');
     const closeBtn = document.getElementById('close-certificate-modal');
     const modalImage = document.getElementById('certificate-modal-image');
@@ -136,11 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalIssuer = document.getElementById('certificate-modal-issuer');
     const modalVerify = document.getElementById('certificate-modal-verify');
 
-    if (!track) return;
+    if (!track || !scroller) return;
+
+    let wasDragging = false;
 
     const buildCard = (cert) => {
         const card = document.createElement('div');
-        card.className = 'group relative flex-shrink-0 w-72 md:w-80 bg-ui-bg rounded-2xl overflow-hidden border border-white/10 shadow-xl cursor-pointer transition-transform duration-300 hover:-translate-y-2';
+        card.className = 'cert-card group relative flex-shrink-0 w-72 md:w-80 bg-ui-bg rounded-2xl overflow-hidden border border-white/10 shadow-xl cursor-pointer transition-all duration-300 hover:-translate-y-3 hover:scale-[1.04] hover:border-glow-blue/60';
         card.setAttribute('data-hoverable', '');
         card.innerHTML = `
             <div class="w-full h-48 overflow-hidden">
@@ -151,8 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="text-text-subtle text-sm truncate">${cert.issuer}</p>
             </div>
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+            <div class="cert-shine"></div>
         `;
         card.addEventListener('click', () => {
+            if (wasDragging) return; // don't open the modal after a drag-scroll
             modalImage.src = cert.image;
             modalTitle.textContent = cert.title;
             modalIssuer.textContent = cert.issuer;
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    // Render the list twice back-to-back so the marquee can loop seamlessly.
+    // Render the list twice back-to-back so the scroller can loop seamlessly.
     [...certificates, ...certificates].forEach((cert) => {
         track.appendChild(buildCard(cert));
     });
@@ -171,6 +172,116 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.classList.add('hidden');
     });
+
+    // -------------------------------------------------------------------
+    // Manual control: drag/swipe to scroll, arrow buttons, gentle autoplay
+    // that always yields to the user and never fights their input.
+    // -------------------------------------------------------------------
+    let halfWidth = 0;
+    const recalcHalfWidth = () => { halfWidth = track.scrollWidth / 2; };
+    // Wait a tick for images/layout to settle before measuring.
+    window.addEventListener('load', recalcHalfWidth);
+    setTimeout(recalcHalfWidth, 300);
+    window.addEventListener('resize', recalcHalfWidth);
+
+    // Start in the middle copy so the user can scroll either direction freely.
+    setTimeout(() => { scroller.scrollLeft = halfWidth || scroller.scrollWidth / 2; }, 350);
+
+    let scrollPos = null; // floating-point autoplay accumulator; scrollLeft itself rounds to whole pixels
+
+    const keepInLoop = () => {
+        if (!halfWidth) return;
+        if (scroller.scrollLeft <= 2) {
+            scroller.scrollLeft += halfWidth;
+            if (scrollPos !== null) scrollPos += halfWidth;
+        } else if (scroller.scrollLeft >= halfWidth * 2 - 2) {
+            scroller.scrollLeft -= halfWidth;
+            if (scrollPos !== null) scrollPos -= halfWidth;
+        }
+    };
+    scroller.addEventListener('scroll', keepInLoop);
+
+    // --- Autoplay (pauses the instant the user touches/hovers/drags it) ---
+    let autoplayPaused = false;
+    let resumeTimer = null;
+    let lastTime = null;
+    const AUTOPLAY_SPEED = 55; // px per second, gentle drift
+
+    const scheduleResume = (delay = 2500) => {
+        autoplayPaused = true;
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+            autoplayPaused = false;
+            lastTime = null;
+            scrollPos = scroller.scrollLeft; // resync so it continues from wherever the user left it
+        }, delay);
+    };
+
+    const tick = (now) => {
+        if (!autoplayPaused && !isDragging) {
+            if (scrollPos === null) scrollPos = scroller.scrollLeft;
+            if (lastTime !== null) {
+                const dt = (now - lastTime) / 1000;
+                scrollPos += AUTOPLAY_SPEED * dt;
+                scroller.scrollLeft = scrollPos;
+            }
+            lastTime = now;
+        } else {
+            lastTime = null;
+        }
+        requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    scroller.addEventListener('mouseenter', () => scheduleResume(999999));
+    scroller.addEventListener('mouseleave', () => scheduleResume(1200));
+
+    // --- Prev / Next buttons ---
+    const cardStep = () => (track.children[0] ? track.children[0].getBoundingClientRect().width + 32 : 320);
+    prevBtn.addEventListener('click', () => {
+        scheduleResume();
+        scroller.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+        scheduleResume();
+        scroller.scrollBy({ left: cardStep(), behavior: 'smooth' });
+    });
+
+    // --- Drag to scroll (mouse + touch via pointer events) ---
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let dragMoved = 0;
+
+    scroller.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        wasDragging = false;
+        dragMoved = 0;
+        dragStartX = e.clientX;
+        dragStartScroll = scroller.scrollLeft;
+        scroller.classList.add('dragging');
+        scheduleResume(999999);
+    });
+
+    window.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const delta = e.clientX - dragStartX;
+        dragMoved = Math.max(dragMoved, Math.abs(delta));
+        scroller.scrollLeft = dragStartScroll - delta;
+    });
+
+    const endDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        scroller.classList.remove('dragging');
+        if (dragMoved > 5) {
+            wasDragging = true;
+            setTimeout(() => { wasDragging = false; }, 50);
+        }
+        scheduleResume(1500);
+    };
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
 });
 
 

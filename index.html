@@ -177,10 +177,19 @@
                     Certificates
                     <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
                 </h2>
+                <p class="text-text-subtle text-sm" data-hoverable>Drag, swipe, or use the arrows to browse at your own pace.</p>
             </div>
-            <div class="cert-marquee relative w-full">
-                <div id="certificates-track" class="cert-track flex gap-8 w-max px-6">
-                    </div>
+            <div class="relative w-full">
+                <button id="cert-prev" class="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-ui-bg/90 border border-white/10 text-glow-blue hover:border-glow-blue/70 hover:bg-ui-bg transition-colors duration-200 backdrop-blur-sm shadow-lg" data-hoverable aria-label="Scroll certificates backward">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div id="certificates-scroll" class="cert-marquee relative w-full">
+                    <div id="certificates-track" class="cert-track flex gap-8 w-max px-6">
+                        </div>
+                </div>
+                <button id="cert-next" class="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-ui-bg/90 border border-white/10 text-glow-blue hover:border-glow-blue/70 hover:bg-ui-bg transition-colors duration-200 backdrop-blur-sm shadow-lg" data-hoverable aria-label="Scroll certificates forward">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
             </div>
         </section>
 
