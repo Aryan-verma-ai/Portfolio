@@ -5,12 +5,12 @@ tsParticles.load("tsparticles", {
     fpsLimit: 60,
     particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#4E338A" }, // Particle color
+        color: { value: "#281372" },
         shape: { type: "circle" },
-        opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-        size: { value: 3, random: true, anim: { enable: false } },
-        line_linked: { enable: true, distance: 150, color: "#00FFFF", opacity: 0.4, width: 1 }, // Line color
-        move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false } }
+        opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2, sync: false } },
+        size: { value: 2.5, random: true, anim: { enable: false } },
+        line_linked: { enable: true, distance: 200, color: "#00e5ff", opacity: 0.3, width: 1 },
+        move: { enable: true, speed: 1, direction: "none", random: false, straight: true, out_mode: "out", bounce: false, attract: { enable: false } }
     },
     interactivity: {
         detect_on: "canvas",
@@ -20,13 +20,12 @@ tsParticles.load("tsparticles", {
             resize: true
         },
         modes: {
-            grab: { distance: 140, line_opacity: 1 },
+            grab: { distance: 140, line_opacity: 0.6 },
             push: { particles_nb: 4 },
         }
     },
     retina_detect: true
 });
-
 
 // ===================================================================================
 // CUSTOM CURSOR LOGIC
@@ -42,13 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         isHovering = e.target.closest('[data-hoverable]') !== null;
-
         if (isIdle) {
             isIdle = false;
-            velocityX = 5;
-            velocityY = 5;
+            velocityX = 0;
+            velocityY = 0;
         }
-        
         clearTimeout(idleTimeout);
         idleTimeout = setTimeout(() => {
             isIdle = true;
@@ -66,17 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorX += (mouseX - cursorX) * 0.1;
             cursorY += (mouseY - cursorY) * 0.1;
         }
-
         const currentElement = document.elementFromPoint(cursorX, cursorY);
         const isOverImage = currentElement && (currentElement.tagName === 'IMG' || currentElement.closest('img'));
         const isOverHoverable = currentElement && currentElement.closest('[data-hoverable]');
-
         const cursorSize = (isOverHoverable && !isOverImage) ? 80 : 80;
         cursor.style.left = `${cursorX - cursorSize / 2}px`;
         cursor.style.top = `${cursorY - cursorSize / 2}px`;
         cursor.style.width = `${cursorSize}px`;
         cursor.style.height = `${cursorSize}px`;
-
         if (isOverHoverable) {
             if (isOverImage) {
                 cursor.style.backgroundColor = 'rgba(0, 255, 255, 0.2)';
@@ -92,10 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.style.mixBlendMode = 'normal';
             cursor.style.border = '2px solid #00FFFF';
         }
-
         requestAnimationFrame(animateCursor);
     }
-    
     animateCursor();
 
     function startFloatingAnimation() {
@@ -104,28 +96,198 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ===================================================================================
+// PAGE LOADER
+// ===================================================================================
+(() => {
+    const loader = document.getElementById('loader');
+    const particleHost = document.getElementById('loader-particles');
+    const PARTICLE_COUNT = 18;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const p = document.createElement('span');
+        const angle = (Math.PI * 2 * i) / PARTICLE_COUNT + Math.random() * 0.3;
+        const distance = 140 + Math.random() * 120;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--dy', `${dy}px`);
+        p.style.animationDelay = `${1.7 + Math.random() * 0.25}s`;
+        particleHost.appendChild(p);
+    }
+    const hideLoader = () => {
+        loader.classList.add('loader-hide');
+        document.body.style.overflow = '';
+        revealHero();
+        setTimeout(() => loader.remove(), 800);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('load', () => {
+        setTimeout(hideLoader, 2200);
+    });
+    setTimeout(hideLoader, 3200);
+})();
 
 // ===================================================================================
-// CERTIFICATES SECTION LOGIC
+// TYPING EFFECT
+// ===================================================================================
+(() => {
+    const target = document.getElementById('typed-text');
+    if (!target) return;
+    const roles = [
+        'Full Stack Developer',
+        'AI Enthusiast',
+        'Love Travelling',
+        'Creative Problem Solver'
+    ];
+    let roleIndex = 0, charIndex = 0, deleting = false;
+    const tick = () => {
+        const current = roles[roleIndex];
+        if (!deleting) {
+            charIndex++;
+            target.textContent = current.slice(0, charIndex);
+            if (charIndex === current.length) {
+                deleting = true;
+                setTimeout(tick, 1400);
+                return;
+            }
+        } else {
+            charIndex--;
+            target.textContent = current.slice(0, charIndex);
+            if (charIndex === 0) {
+                deleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+            }
+        }
+        setTimeout(tick, deleting ? 40 : 75);
+    };
+    tick();
+})();
+
+// ===================================================================================
+// NAVBAR
+// ===================================================================================
+(() => {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const onScroll = () => {
+        navbar.classList.toggle('solid', window.scrollY > 40);
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    if (toggle && mobileMenu) {
+        toggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach((a) => {
+            a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+    }
+})();
+
+// ===================================================================================
+// SCROLL REVEAL
+// ===================================================================================
+function revealHero() {
+    document.querySelectorAll('.in-view-init').forEach((el) => {
+        el.classList.add('in-view');
+    });
+}
+
+(() => {
+    const items = document.querySelectorAll('.reveal:not(.in-view-init), .tl-item');
+    if (!('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('in-view'));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    items.forEach((el) => observer.observe(el));
+})();
+
+// ===================================================================================
+// BUTTON RIPPLE
+// ===================================================================================
+document.querySelectorAll('.btn-ripple').forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const span = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        span.className = 'ripple-span';
+        span.style.width = span.style.height = `${size}px`;
+        span.style.left = `${e.clientX - rect.left - size / 2}px`;
+        span.style.top = `${e.clientY - rect.top - size / 2}px`;
+        this.appendChild(span);
+        setTimeout(() => span.remove(), 650);
+    });
+});
+
+// ===================================================================================
+// SUBTLE CARD TILT
+// ===================================================================================
+document.querySelectorAll('.hang-card-inner, .project-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+    card.style.transformStyle = 'preserve-3d';
+});
+
+// ===================================================================================
+// CONTACT FORM
+// ===================================================================================
+(() => {
+    const form = document.getElementById('contact-form');
+    const note = document.getElementById('form-note');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+        const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+        window.location.href = `mailto:aryanverma.dev@gmail.com?subject=${subject}&body=${body}`;
+        note.textContent = 'Opening your email app…';
+        setTimeout(() => { note.textContent = ''; }, 4000);
+        form.reset();
+    });
+})();
+
+// ===================================================================================
+// FOOTER YEAR
+// ===================================================================================
+(() => {
+    const year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
+})();
+
+// ===================================================================================
+// CERTIFICATES SECTION LOGIC (MANUAL SLIDER)
 // ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Edit this array to add/remove/update your certificates.
-    // "image" should point to a scanned/exported image of the certificate.
     const certificates = [
         { image: './images/certificates/ai-for-marketing.png', title: 'AI for Marketing', issuer: 'Emory University (Coursera) • Aug 6, 2025', verify: 'https://coursera.org/verify/specialization/9PG59EFYQQ2R' },
-        { image: './images/certificates/design-thinking.png', title: 'Design Thinking', issuer: 'University of Virginia Darden School of Business (Coursera) • Dec 17, 2024', verify: 'https://coursera.org/verify/specialization/V3QM2W6M0JDE' },
+        { image: './images/certificates/design-thinking.png', title: 'Design Thinking', issuer: 'UVA Darden School of Business (Coursera) • Dec 17, 2024', verify: 'https://coursera.org/verify/specialization/V3QM2W6M0JDE' },
         { image: './images/certificates/esg-investing.png', title: 'ESG Investing: Financial Decisions in Flux', issuer: 'Interactive Brokers (Coursera) • Jan 2, 2025', verify: 'https://coursera.org/verify/specialization/Q8ZQ92HEC8HD' },
-        { image: './images/certificates/natural-disaster-climate-risk.png', title: 'Natural Disaster and Climate Change Risk Assessment', issuer: 'BIDAcademy (Coursera) • Dec 2, 2024', verify: 'https://coursera.org/verify/specialization/TO9W1ANM4BL6' },
+        { image: './images/certificates/natural-disaster-climate-risk.png', title: 'Natural Disaster & Climate Risk Assessment', issuer: 'BIDAcademy (Coursera) • Dec 2, 2024', verify: 'https://coursera.org/verify/specialization/TO9W1ANM4BL6' },
         { image: './images/certificates/social-media-marketing.png', title: 'Social Media Marketing in Practice', issuer: 'Digital Marketing Institute (Coursera) • Dec 2, 2024', verify: 'https://coursera.org/verify/specialization/ABN1F9QSYVLL' },
-        { image: './images/certificates/azure-ai-fundamentals.png', title: 'Azure AI Fundamentals', issuer: 'Microsoft Certified • Nov 21, 2024', verify: 'https://verify.certiport.com/Uxkw-s4wW' },
-        { image: './images/certificates/azure-fundamentals.png', title: 'Azure Fundamentals', issuer: 'Microsoft Certified • Jun 27, 2025', verify: 'https://verify.certiport.com/2Qnv-XMSn' }
+        { image: './images/certificates/azure-ai-fundamentals.png', title: 'Azure AI Fundamentals', issuer: 'Microsoft Certified • Nov 21, 2024', verify: '#' },
+        { image: './images/certificates/azure-fundamentals.png', title: 'Azure Fundamentals', issuer: 'Microsoft Certified • Jun 27, 2025', verify: '#' },
+        { image: './images/certificates/ai-masterclass-chitkara.png', title: 'AI, ChatGPT, DeepSeek & Metaverse Masterclass', issuer: 'Chitkara University • May 19–21, 2025 • Scored 99/100', verify: '#' }
     ];
 
     const track = document.getElementById('certificates-track');
-    const scroller = document.getElementById('certificates-scroll');
-    const prevBtn = document.getElementById('cert-prev');
-    const nextBtn = document.getElementById('cert-next');
     const modal = document.getElementById('certificate-modal');
     const closeBtn = document.getElementById('close-certificate-modal');
     const modalImage = document.getElementById('certificate-modal-image');
@@ -133,27 +295,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalIssuer = document.getElementById('certificate-modal-issuer');
     const modalVerify = document.getElementById('certificate-modal-verify');
 
-    if (!track || !scroller) return;
-
-    let wasDragging = false;
+    if (!track) return;
 
     const buildCard = (cert) => {
         const card = document.createElement('div');
-        card.className = 'cert-card group relative flex-shrink-0 w-72 md:w-80 bg-ui-bg rounded-2xl overflow-hidden border border-white/10 shadow-xl cursor-pointer transition-all duration-300 hover:-translate-y-3 hover:scale-[1.04] hover:border-glow-blue/60';
+        card.className = 'cert-card';
         card.setAttribute('data-hoverable', '');
         card.innerHTML = `
-            <div class="w-full h-48 overflow-hidden">
-                <img src="${cert.image}" alt="${cert.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="cert-media">
+                <img src="${cert.image}" alt="${cert.title}">
             </div>
-            <div class="p-5 space-y-1">
-                <h3 class="text-lg font-bold text-glow-blue truncate">${cert.title}</h3>
-                <p class="text-text-subtle text-sm truncate">${cert.issuer}</p>
+            <div class="cert-body">
+                <h3>${cert.title}</h3>
+                <p>${cert.issuer}</p>
+                <div class="cert-verify">Verify Credential →</div>
             </div>
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-            <div class="cert-shine"></div>
         `;
         card.addEventListener('click', () => {
-            if (wasDragging) return; // don't open the modal after a drag-scroll
             modalImage.src = cert.image;
             modalTitle.textContent = cert.title;
             modalIssuer.textContent = cert.issuer;
@@ -163,8 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    // Render the list twice back-to-back so the scroller can loop seamlessly.
-    [...certificates, ...certificates].forEach((cert) => {
+    // Render certificates
+    certificates.forEach((cert) => {
         track.appendChild(buildCard(cert));
     });
 
@@ -173,324 +331,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) modal.classList.add('hidden');
     });
 
-    // -------------------------------------------------------------------
-    // Manual control: drag/swipe to scroll, arrow buttons, gentle autoplay
-    // that always yields to the user and never fights their input.
-    // -------------------------------------------------------------------
-    let halfWidth = 0;
-    const recalcHalfWidth = () => { halfWidth = track.scrollWidth / 2; };
-    // Wait a tick for images/layout to settle before measuring.
-    window.addEventListener('load', recalcHalfWidth);
-    setTimeout(recalcHalfWidth, 300);
-    window.addEventListener('resize', recalcHalfWidth);
+    // Manual Slider Logic
+    const certContainer = document.getElementById('cert-marquee-container');
+    const certPrevBtn = document.getElementById('cert-prev');
+    const certNextBtn = document.getElementById('cert-next');
 
-    // Start in the middle copy so the user can scroll either direction freely.
-    setTimeout(() => { scroller.scrollLeft = halfWidth || scroller.scrollWidth / 2; }, 350);
+    if (certContainer && certPrevBtn && certNextBtn) {
+        const firstCard = document.querySelector('.cert-card');
+        const gap = 24;
+        const scrollAmount = firstCard ? (firstCard.offsetWidth + gap) : 324;
 
-    let scrollPos = null; // floating-point autoplay accumulator; scrollLeft itself rounds to whole pixels
-
-    const keepInLoop = () => {
-        if (!halfWidth) return;
-        if (scroller.scrollLeft <= 2) {
-            scroller.scrollLeft += halfWidth;
-            if (scrollPos !== null) scrollPos += halfWidth;
-        } else if (scroller.scrollLeft >= halfWidth * 2 - 2) {
-            scroller.scrollLeft -= halfWidth;
-            if (scrollPos !== null) scrollPos -= halfWidth;
-        }
-    };
-    scroller.addEventListener('scroll', keepInLoop);
-
-    // --- Autoplay (pauses the instant the user touches/hovers/drags it) ---
-    let autoplayPaused = false;
-    let resumeTimer = null;
-    let lastTime = null;
-    const AUTOPLAY_SPEED = 55; // px per second, gentle drift
-
-    const scheduleResume = (delay = 2500) => {
-        autoplayPaused = true;
-        if (resumeTimer) clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(() => {
-            autoplayPaused = false;
-            lastTime = null;
-            scrollPos = scroller.scrollLeft; // resync so it continues from wherever the user left it
-        }, delay);
-    };
-
-    const tick = (now) => {
-        if (!autoplayPaused && !isDragging) {
-            if (scrollPos === null) scrollPos = scroller.scrollLeft;
-            if (lastTime !== null) {
-                const dt = (now - lastTime) / 1000;
-                scrollPos += AUTOPLAY_SPEED * dt;
-                scroller.scrollLeft = scrollPos;
-            }
-            lastTime = now;
-        } else {
-            lastTime = null;
-        }
-        requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-
-    scroller.addEventListener('mouseenter', () => scheduleResume(999999));
-    scroller.addEventListener('mouseleave', () => scheduleResume(1200));
-
-    // --- Prev / Next buttons ---
-    const cardStep = () => (track.children[0] ? track.children[0].getBoundingClientRect().width + 32 : 320);
-    prevBtn.addEventListener('click', () => {
-        scheduleResume();
-        scroller.scrollBy({ left: -cardStep(), behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', () => {
-        scheduleResume();
-        scroller.scrollBy({ left: cardStep(), behavior: 'smooth' });
-    });
-
-    // --- Drag to scroll (mouse + touch via pointer events) ---
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartScroll = 0;
-    let dragMoved = 0;
-
-    scroller.addEventListener('pointerdown', (e) => {
-        isDragging = true;
-        wasDragging = false;
-        dragMoved = 0;
-        dragStartX = e.clientX;
-        dragStartScroll = scroller.scrollLeft;
-        scroller.classList.add('dragging');
-        scheduleResume(999999);
-    });
-
-    window.addEventListener('pointermove', (e) => {
-        if (!isDragging) return;
-        const delta = e.clientX - dragStartX;
-        dragMoved = Math.max(dragMoved, Math.abs(delta));
-        scroller.scrollLeft = dragStartScroll - delta;
-    });
-
-    const endDrag = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        scroller.classList.remove('dragging');
-        if (dragMoved > 5) {
-            wasDragging = true;
-            setTimeout(() => { wasDragging = false; }, 50);
-        }
-        scheduleResume(1500);
-    };
-    window.addEventListener('pointerup', endDrag);
-    window.addEventListener('pointercancel', endDrag);
-});
-
-
-// ===================================================================================
-// IMAGE GALLERY LOGIC
-// ===================================================================================
-document.addEventListener('DOMContentLoaded', () => {
-
-    const galleryItems = [
-        {
-            image: './images/img2.JPG',
-            title: 'Participant – Rudiments of AI Program',
-            description: 'Successfully completed a 3-day "Rudiments of AI" program conducted by Chancellor Ashok Chitkara, scoring 99 out of 100..'
-        },
-        {
-            image: './images/techacks2.jpeg',
-            title: 'Techacks Winners',
-            description: 'A group photo with the winners of Techacks, celebrating their success.'
-        },
-        {
-            image: './images/techacks3.jpeg',
-            title: 'Techacks Organizing Team',
-            description: 'The dedicated organizing team behind the Techacks event.'
-        },
-        {
-            image: './images/techacks4.jpeg',
-            title: 'Learning Session',
-            description: 'Engaging in a collaborative learning session during the hackathon.'
-        },
-        {
-            image: './images/techacks5.jpeg',
-            title: 'Award Ceremony',
-            description: 'Receiving an award for contributions or participation at the event.'
-        },
-        {
-            image: './images/techacks6.jpeg',
-            title: 'Team Brainstorming',
-            description: 'Intense brainstorming session with the team, developing innovative ideas.'
-        },
-    ];
-
-    const mainImage = document.getElementById('mainGalleryImage');
-    const galleryTitle = document.getElementById('galleryTitle');
-    const galleryDescription = document.getElementById('galleryDescription');
-    const prevButton = document.getElementById('prevImage');
-    const nextButton = document.getElementById('nextImage');
-
-    let currentIndex = 0;
-
-    const updateGallery = () => {
-        const item = galleryItems[currentIndex];
-        mainImage.src = item.image;
-        galleryTitle.textContent = item.title;
-        galleryDescription.textContent = item.description;
-    };
-
-    prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-        updateGallery();
-    });
-
-    nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % galleryItems.length;
-        updateGallery();
-    });
-
-    updateGallery();
-});
-
-
-// ===================================================================================
-// PROJECT CAROUSEL & MODAL LOGIC
-// ===================================================================================
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- 1. Project Data ---
-    const projects = [
-        {
-            image: './images/sportify.png',
-            title: 'Sportify - E-commerce App',
-            description: 'A full-stack e-commerce platform for sports equipment. Features include user authentication, product listings, a shopping cart, and a secure checkout process.',
-            github: 'https://github.com/your-username/sportify',
-            live: 'https://sportify-demo.vercel.app'
-        },
-        {
-            image: './images/techacks1.jpeg',
-            title: 'Techacks - Hackathon Volunteer',
-            description: 'A dedicated volunteer at the 36-hour Techacks4.0 hackathon, supporting event logistics and participant needs.',
-            github: 'https://github.com/your-username/techacks',
-            live: '#'
-        },
-        {
-            image: './images/another-project-image.jpg',
-            title: 'My Awesome Project',
-            description: 'This is a great example of a web application I built using modern technologies. It solves a real-world problem.',
-            github: 'https://github.com/your-username/another-project',
-            live: 'https://another-project-demo.vercel.app'
-        }
-        // Add more project objects here as needed
-    ];
-
-    // --- 2. DOM Elements ---
-    const carousel = document.getElementById('project-carousel');
-    const prevBtn = document.getElementById('prev-project');
-    const nextBtn = document.getElementById('next-project');
-
-    const modal = document.getElementById('project-modal');
-    const closeModalBtn = document.getElementById('close-modal');
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalGithub = document.getElementById('modal-github');
-    const modalLive = document.getElementById('modal-live');
-
-    let currentIndex = 0;
-
-    // --- 3. Function to Render Projects ---
-    const renderProjects = () => {
-        carousel.innerHTML = '';
-        projects.forEach((project, index) => {
-            const card = document.createElement('div');
-            card.className = 'project-card bg-ui-bg rounded-2xl overflow-hidden shadow-2xl relative cursor-pointer group';
-            card.setAttribute('data-hoverable', '');
-
-            const imageWrapper = document.createElement('div');
-            imageWrapper.className = 'absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105';
-            imageWrapper.style.backgroundImage = `url('${project.image}')`;
-            card.appendChild(imageWrapper);
-
-            const overlay = document.createElement('div');
-            overlay.className = 'absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/60 rounded-2xl';
-            card.appendChild(overlay);
-
-            const textContainer = document.createElement('div');
-            textContainer.className = 'absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white z-10';
-
-            const title = document.createElement('h3');
-            title.className = 'text-3xl md:text-4xl font-bold text-glow-blue mb-2 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100';
-            title.textContent = project.title;
-
-            const viewDetailsBtn = document.createElement('button');
-            viewDetailsBtn.className = 'bg-glow-blue text-bg-primary-dark px-6 py-3 rounded-full font-semibold text-lg mt-4 opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100';
-            viewDetailsBtn.textContent = 'View Details';
-            viewDetailsBtn.addEventListener('click', (event) => {
-                event.stopPropagation();
-                showModal(projects[index]);
-            });
-
-            textContainer.appendChild(title);
-            textContainer.appendChild(viewDetailsBtn);
-            card.appendChild(textContainer);
-            carousel.appendChild(card);
+        certPrevBtn.addEventListener('click', () => {
+            certContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
 
-        const projectCards = document.querySelectorAll('.project-card');
-        projectCards.forEach((card, index) => {
-            card.addEventListener('dblclick', () => {
-                showModal(projects[index]);
-            });
+        certNextBtn.addEventListener('click', () => {
+            certContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
-    };
-
-    // --- 4. Carousel Navigation Logic ---
-    const updateCarousel = () => {
-        const itemWidth = carousel.firstElementChild.getBoundingClientRect().width;
-        carousel.scrollLeft = currentIndex * itemWidth;
-    };
-
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % projects.length;
-        updateCarousel();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
-        updateCarousel();
-    });
-
-    // --- 5. Modal Functionality ---
-    const showModal = (project) => {
-        modalImage.src = project.image;
-        modalTitle.textContent = project.title;
-        modalDescription.textContent = project.description;
-        modalGithub.href = project.github;
-        modalLive.href = project.live;
-
-        if (project.live === '#') {
-            modalLive.classList.add('hidden');
-        } else {
-            modalLive.classList.remove('hidden');
-        }
-        
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    };
-
-    const hideModal = () => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-    };
-
-    closeModalBtn.addEventListener('click', hideModal);
-
-    modal.addEventListener('click', (e) => {
-        if (e.target.id === 'project-modal') {
-            hideModal();
-        }
-    });
-
-    renderProjects();
+    }
 });
-

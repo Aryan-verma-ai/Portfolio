@@ -4,280 +4,476 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aryan Verma | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script>
-      // Color Palette based on your provided image
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'bg-primary-dark': '#1A0C38', // Deep Purple
-              'accent-purple': '#4E338A',  // Medium Purple for the text box
-              'text-light': '#F0F0F0',    // Off-White
-              'text-subtle': '#A79DC4',   // Light Purple for subtext
-              'glow-blue': '#00FFFF',      // Electric Blue for highlights
-              'ui-bg': '#241E4E',        // Dark Purple-Gray for UI cards
-            },
-            fontFamily: {
-              'sans': ['Inter', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
 </head>
-<body class="bg-bg-primary-dark font-sans text-text-light">
+<body>
 
+    <!-- PARTICLES BACKGROUND -->
     <div id="tsparticles"></div>
-    <div id="custom-cursor" class="fixed rounded-full pointer-events-none z-[999] transition-all duration-300 ease-out"></div>
 
-    <main class="relative z-10">
+    <!-- CUSTOM CURSOR -->
+    <div id="custom-cursor"></div>
 
-        <section class="relative min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden">
-            <!-- decorative ambient blobs to fill empty space -->
-            <div class="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-glow-blue/20 blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-accent-purple/30 blur-3xl pointer-events-none"></div>
+    <!-- PAGE LOADER -->
+    <div id="loader">
+        <div class="loader-stage">
+            <svg class="loader-monogram" viewBox="0 0 200 120">
+                <path class="p1" d="M20,100 L60,20 L100,100 M40,70 L80,70" />
+                <path class="p2" d="M120,20 L120,100 M120,20 L160,100 M120,60 L160,60 M160,20 L160,100" />
+            </svg>
+            <div class="loader-fill">AV</div>
+            <div class="loader-scan"></div>
+            <div class="loader-particles" id="loader-particles"></div>
+            <div class="loader-caption">Compiling portfolio</div>
+        </div>
+    </div>
 
-            <div class="absolute top-6 right-6 text-sm text-text-subtle opacity-70">
-                Aryan Verma | Portfolio
-            </div>
-            <div class="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-24">
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#home" class="nav-logo">AV<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#photography">Photography</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="./resume.pdf" class="nav-resume-btn" download>Resume</a>
+        <button id="nav-toggle" class="nav-toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </nav>
 
-                <!-- Left: intro text -->
-                <div class="max-w-xl space-y-6 text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight" data-hoverable>
-                        Hi There 👋! I'm <br>
-                        <span class="text-glow-blue">Aryan Verma</span>
-                    </h1>
-                    <div class="w-40 h-1 bg-glow-blue mx-auto md:mx-0 rounded-full"></div>
-                    <p class="text-base md:text-lg text-text-subtle leading-relaxed" data-hoverable>
-                        Specializing in user-focused design, I build responsive interfaces fueled by open-source collaboration. I combine technical ability with a keen design sensibility, working across the MERN stack while diving deeper into Spring Boot for industry-level backend development.
-                    </p>
-                    <div class="flex justify-center md:justify-start space-x-6 pt-2 text-glow-blue font-bold text-lg" data-hoverable>
-                        <a href="https://github.com/Aryan-verma-ai" class="hover:text-white transition-colors duration-200">GitHub</a>
-                        <a href="https://www.linkedin.com/in/aryan-verma-638594320/" class="hover:text-white transition-colors duration-200">LinkedIn</a>
-                        <a href="https://www.instagram.com/tf.aryannnnnnn/?next=%2F" class="hover:text-white transition-colors duration-200">Instagram</a>
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#photography">Photography</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home">
+            <div class="container hero-grid">
+                <div class="hero-content reveal fade-up in-view-init">
+                    <p class="hero-hello">Hello, I'm</p>
+                    <h1 class="hero-name">Aryan <span class="accent">Verma</span></h1>
+                    <div class="hero-type-row">
+                        <span class="bracket">&lt;</span>
+                        <span id="typed-text"></span>
+                        <span class="bracket">/&gt;</span>
+                        <span class="type-cursor"></span>
+                    </div>
+                    <p class="hero-desc">I build clean, purposeful web experiences from front to back — part developer, part designer, and a curious AI enthusiast who enjoys turning tricky problems into simple, working products.</p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary btn-ripple">View Projects</a>
+                        <a href="./resume.pdf" class="btn btn-outline btn-ripple" download>Download Resume</a>
                     </div>
                 </div>
-
-                <!-- Right: hanging ID badge -->
-                <div class="relative flex-shrink-0 flex flex-col items-center pt-6" data-hoverable>
-                    <!-- clip -->
-                    <div class="w-9 h-5 rounded-t-md border-2 border-b-0 border-glow-blue/50 bg-ui-bg relative z-30"></div>
-
-                    <div class="badge-hang flex flex-col items-center">
-                        <!-- lanyard ribbon -->
-                        <div class="relative w-14 md:w-16 py-6 -mt-px bg-gradient-to-b from-accent-purple to-bg-primary-dark border-x border-b border-glow-blue/30 rounded-b-lg shadow-lg flex items-center justify-center z-20">
-                            <span class="text-glow-blue font-black uppercase tracking-[0.2em] text-xs md:text-sm [writing-mode:vertical-rl]">
-                                Developer
-                            </span>
-                        </div>
-
-                        <!-- connecting cord -->
-                        <svg class="-mt-1 -mb-1 z-10" width="40" height="36" viewBox="0 0 40 36" fill="none">
-                            <path d="M18 0 C 5 12, 5 24, 20 36" stroke="#00FFFF" stroke-opacity="0.5" stroke-width="2" fill="none"/>
-                        </svg>
-
-                        <!-- badge card -->
-                        <div class="relative bg-ui-bg/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-4 md:p-5 w-64 md:w-72 -rotate-2 hover:rotate-0 transition-transform duration-500 z-20">
-                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-3 bg-bg-primary-dark rounded-full border border-white/10"></div>
-                            <div class="text-center mb-4">
-                                <p class="font-mono text-glow-blue font-bold text-base md:text-lg tracking-wide">&lt;ARYAN VERMA&gt;</p>
-                                <p class="text-text-subtle text-xs uppercase tracking-widest mt-1">Full-Stack Developer</p>
+                <div class="hero-visual reveal scale-in in-view-init">
+                    <div class="hang-wrap">
+                        <div class="hang-clip"></div>
+                        <div class="hang-cord"></div>
+                        <div class="hang-card">
+                            <div class="hang-card-inner tilt badge-hang" data-hoverable>
+                                <div class="hang-notch"></div>
+                                <div class="hang-photo">
+                                    <img src="./images/img1.jpeg" alt="Aryan Verma">
+                                </div>
+                                <h3 class="hang-name">Aryan Verma</h3>
+                                <p class="hang-role">Full-Stack Developer</p>
+                                <div class="hang-barcode"></div>
                             </div>
-                            <div class="rounded-xl overflow-hidden border-2 border-glow-blue/40 shadow-lg">
-                                <img src="./images/img1.jpeg" alt="Aryan Verma" class="w-full h-56 md:h-64 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">About</span>
+                    <h2 class="section-title">A little about me</h2>
+                    <p class="section-sub">The short version of how I got here, and where I'm headed next.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card glass-card hover-glow reveal fade-up d1" data-hoverable>
+                        <div class="about-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <h3>Who I am</h3>
+                        <p>A full-stack developer who enjoys the entire journey of a product — from a sketched-out idea, to a working backend, to an interface people actually enjoy using. I care about clean code as much as clean design.</p>
+                    </div>
+                    <div class="about-card glass-card hover-glow reveal fade-up d2" data-hoverable>
+                        <div class="about-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        </div>
+                        <h3>Education</h3>
+                        <p>Currently pursuing my degree while building projects on the side — treating every course as a starting point rather than the finish line.</p>
+                        <div class="about-tag-row">
+                            <span class="about-tag">Computer Science</span>
+                            <span class="about-tag">Self-taught Dev</span>
+                        </div>
+                    </div>
+                    <div class="about-card glass-card hover-glow reveal fade-up d3" data-hoverable>
+                        <div class="about-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        </div>
+                        <h3>Currently learning</h3>
+                        <ul>
+                            <li>Backend architecture with Flask & FastAPI</li>
+                            <li>Applied AI & machine learning basics</li>
+                            <li>System design fundamentals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">Skills</span>
+                    <h2 class="section-title">Tools I work with</h2>
+                    <p class="section-sub">A quick look at what's in my toolbox, grouped by where it's used.</p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card glass-card hover-glow reveal fade-up d1" data-hoverable>
+                        <div class="skill-card-head">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            </div>
+                            <h3>Frontend</h3>
+                        </div>
+                        <div class="skill-chip-list">
+                            <span class="skill-chip">HTML</span>
+                            <span class="skill-chip">CSS</span>
+                            <span class="skill-chip">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card hover-glow reveal fade-up d2" data-hoverable>
+                        <div class="skill-card-head">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                            </div>
+                            <h3>Backend</h3>
+                        </div>
+                        <div class="skill-chip-list">
+                            <span class="skill-chip">Python</span>
+                            <span class="skill-chip">Flask</span>
+                            <span class="skill-chip">FastAPI</span>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card hover-glow reveal fade-up d3" data-hoverable>
+                        <div class="skill-card-head">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                            </div>
+                            <h3>Languages</h3>
+                        </div>
+                        <div class="skill-chip-list">
+                            <span class="skill-chip">Java</span>
+                            <span class="skill-chip">Python</span>
+                            <span class="skill-chip">C++</span>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card hover-glow reveal fade-up d1" data-hoverable>
+                        <div class="skill-card-head">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            </div>
+                            <h3>Tools</h3>
+                        </div>
+                        <div class="skill-chip-list">
+                            <span class="skill-chip">Git</span>
+                            <span class="skill-chip">GitHub</span>
+                            <span class="skill-chip">VS Code</span>
+                            <span class="skill-chip">Figma</span>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card hover-glow reveal fade-up d2" data-hoverable>
+                        <div class="skill-card-head">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </div>
+                            <h3>Creative</h3>
+                        </div>
+                        <div class="skill-chip-list">
+                            <span class="skill-chip">Photography</span>
+                            <span class="skill-chip">Videography</span>
+                            <span class="skill-chip">Video Editing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">Projects</span>
+                    <h2 class="section-title">Featured build</h2>
+                    <p class="section-sub">The project I'm currently most proud of.</p>
+                </div>
+                <div class="project-card glass-card hover-glow reveal fade-up" data-hoverable>
+                    <div class="project-media">
+                        <img src="./images/sportify.png" alt="Sportify Project">
+                    </div>
+                    <div class="project-body">
+                        <h3>Sportify</h3>
+                        <p>A full-stack sports platform built to bring scores, stats and community features together in one clean interface. Handles authentication, dynamic data rendering, and a Python-powered backend serving it all.</p>
+                        <div class="stack-row">
+                            <span class="stack-chip">HTML</span>
+                            <span class="stack-chip">CSS</span>
+                            <span class="stack-chip">JavaScript</span>
+                            <span class="stack-chip">Python</span>
+                            <span class="stack-chip">Flask</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/Aryan-verma-ai" class="btn btn-outline btn-ripple" target="_blank">GitHub</a>
+                            <a href="#" class="btn btn-primary btn-ripple">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATES SECTION (MANUAL SLIDER) -->
+        <section id="certificates">
+            <div class="container">
+                <div class="cert-header-flex reveal fade-up">
+                    <div>
+                        <span class="eyebrow">Certificates</span>
+                        <h2 class="section-title">Courses & credentials</h2>
+                        <p class="section-sub">A few things I've studied outside of class. Click a card to verify it.</p>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <div class="cert-controls">
+                        <button id="cert-prev" class="btn btn-outline btn-ripple">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            Back
+                        </button>
+                        <button id="cert-next" class="btn btn-outline btn-ripple">
+                            Next
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="cert-marquee" id="cert-marquee-container">
+                    <div id="certificates-track" class="cert-track"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIMELINE SECTION -->
+        <section id="timeline">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">Timeline</span>
+                    <h2 class="section-title">How I got here</h2>
+                    <p class="section-sub">Every step, in order, from first line of code to what's next.</p>
+                </div>
+                <div class="timeline">
+                    <div class="tl-item reveal fade-left">
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">01</span>
+                            <h4>Started learning programming</h4>
+                            <p>Wrote my first lines of code and got hooked on figuring out how things work.</p>
+                        </div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-spacer"></div>
+                    </div>
+                    <div class="tl-item reveal fade-right">
+                        <div class="tl-spacer"></div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">02</span>
+                            <h4>Learned HTML & CSS</h4>
+                            <p>Started building real layouts and understanding how the web actually renders.</p>
+                        </div>
+                    </div>
+                    <div class="tl-item reveal fade-left">
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">03</span>
+                            <h4>Built NoteLog</h4>
+                            <p>My first proper project — a simple note-taking app that taught me the basics of state and structure.</p>
+                        </div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-spacer"></div>
+                    </div>
+                    <div class="tl-item reveal fade-right">
+                        <div class="tl-spacer"></div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">04</span>
+                            <h4>Built Sportify</h4>
+                            <p>A bigger full-stack project that pushed me into real backend work with Python and Flask.</p>
+                        </div>
+                    </div>
+                    <div class="tl-item reveal fade-left">
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">05</span>
+                            <h4>Learning backend</h4>
+                            <p>Going deeper into APIs, databases and how to design systems that scale.</p>
+                        </div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-spacer"></div>
+                    </div>
+                    <div class="tl-item reveal fade-right">
+                        <div class="tl-spacer"></div>
+                        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+                        <div class="tl-card glass-card hover-glow" data-hoverable>
+                            <span class="tl-index">06</span>
+                            <h4>Building AI projects</h4>
+                            <p>Exploring applied AI and bringing it into real, useful products — what I'm doing right now.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHOTOGRAPHY SECTION -->
+        <section id="photography">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">Photography</span>
+                    <h2 class="section-title">Behind the lens</h2>
+                    <p class="section-sub">Code isn't the only thing I like framing. Gallery coming soon.</p>
+                </div>
+                <div class="glass-card hover-glow reveal fade-up" style="padding: 60px 40px; text-align: center;" data-hoverable>
+                    <p style="font-size: 1.2rem; color: var(--mute);">📷 Photography gallery in progress — check back soon.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="container">
+                <div class="reveal fade-up">
+                    <span class="eyebrow">Contact</span>
+                    <h2 class="section-title">Let's build something</h2>
+                    <p class="section-sub">Have a project in mind, or just want to say hi? My inbox is open.</p>
+                </div>
+                <div class="contact-wrap">
+                    <form id="contact-form" class="contact-card glass-card hover-glow reveal fade-left" data-hoverable>
+                        <div class="form-row">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-ripple" style="width: 100%; justify-content: center;">Send Message</button>
+                        <p id="form-note" class="form-note"></p>
+                    </form>
+                    <div class="contact-info-card glass-card hover-glow reveal fade-right" data-hoverable>
+                        <a href="https://github.com/Aryan-verma-ai" class="contact-info-item" target="_blank">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </div>
+                            <div>
+                                <div class="label">GitHub</div>
+                                <div class="value">Aryan-verma-ai</div>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/aryan-verma-638594320/" class="contact-info-item" target="_blank">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            </div>
+                            <div>
+                                <div class="label">LinkedIn</div>
+                                <div class="value">aryan-verma</div>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/tf.aryannnnnnn/?next=%2F" class="contact-info-item" target="_blank">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </div>
+                            <div>
+                                <div class="label">Instagram</div>
+                                <div class="value">@tf.aryannnnnnn</div>
+                            </div>
+                        </a>
+                        <a href="mailto:aryanverma.dev@gmail.com" class="contact-info-item">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <div>
+                                <div class="label">Email</div>
+                                <div class="value">aryanverma.dev@gmail.com</div>
+                            </div>
+                        </a>
+                        <div class="contact-info-item">
+                            <div class="about-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div>
+                                <div class="label">Location</div>
+                                <div class="value">India</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="py-24 overflow-hidden">
-            <div class="container mx-auto px-6 md:px-10 lg:px-16">
-                <h2 class="text-5xl font-black mb-12 relative" data-aos="fade-right" data-hoverable>
-                    Tech Stack
-                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
-                </h2>
-                <div class="grid grid-cols-4 sm:grid-cols-6 gap-4 text-center">
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="HTML5">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="CSS3">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="JavaScript">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Bootstrap">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="C++">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Django">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="SQLite">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Git">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="GitHub">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Vercel">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" alt="Vercel" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Visual Studio Code">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code" class="h-12 w-12 object-contain">
-                    </div>
-                    <div class="bg-ui-bg p-4 rounded-lg flex items-center justify-center aspect-square transition-transform hover:scale-110" data-aos="fade-up" data-hoverable title="Python">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="h-12 w-12 object-contain">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 overflow-hidden">
-            <div class="container mx-auto px-6 md:px-10 lg:px-16">
-                <h2 class="text-5xl font-black mb-12 relative" data-aos="fade-right" data-hoverable>
-                    Projects
-                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
-                </h2>
-                <div class="relative w-full group">
-                    <div id="project-carousel" class="flex overflow-hidden relative w-full h-96 md:h-128 lg:h-144 rounded-2xl">
-                        </div>
-                    <button id="prev-project" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full transition-opacity duration-300 z-10" data-hoverable>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button id="next-project" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full transition-opacity duration-300 z-10" data-hoverable>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 overflow-hidden">
-            <div class="container mx-auto px-6 md:px-10 lg:px-16 mb-4">
-                <h2 class="text-5xl font-black mb-4 relative" data-aos="fade-right" data-hoverable>
-                    Certificates
-                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
-                </h2>
-                <p class="text-text-subtle text-sm" data-hoverable>Drag, swipe, or use the arrows to browse at your own pace.</p>
-            </div>
-            <div class="relative w-full">
-                <button id="cert-prev" class="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-ui-bg/90 border border-white/10 text-glow-blue hover:border-glow-blue/70 hover:bg-ui-bg transition-colors duration-200 backdrop-blur-sm shadow-lg" data-hoverable aria-label="Scroll certificates backward">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </button>
-                <div id="certificates-scroll" class="cert-marquee relative w-full">
-                    <div id="certificates-track" class="cert-track flex gap-8 w-max px-6">
-                        </div>
-                </div>
-                <button id="cert-next" class="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-ui-bg/90 border border-white/10 text-glow-blue hover:border-glow-blue/70 hover:bg-ui-bg transition-colors duration-200 backdrop-blur-sm shadow-lg" data-hoverable aria-label="Scroll certificates forward">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
-            </div>
-        </section>
-
-        <section class="from-accent-purple/20 to-bg-primary-dark/10">
-            <div class="container mx-auto px-6 md:px-10 lg:px-16">
-                <h2 class="text-5xl font-black mb-12 relative text-text-light" data-aos="fade-right" data-hoverable>
-                    Image Gallery
-                    <span class="absolute top-1/2 -translate-y-1/2 ml-4 w-full h-1 bg-glow-blue/30"></span>
-                </h2>
-                <div class="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
-                    <div class="relative w-full lg:w-3/5 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-105 group" data-aos="fade-right" data-hoverable>
-                        <img id="mainGalleryImage" src="./images/img1.jpeg" alt="Gallery Image" class="w-full h-auto object-cover rounded-2xl border border-white/10">
-                        <button id="prevImage" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button id="nextImage" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="w-full lg:w-2/5 space-y-6 flex flex-col justify-between h-full">
-                        <div class="bg-gradient-to-br from-accent-purple/70 to-bg-primary-dark/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/10" data-aos="fade-left" data-hoverable>
-                            <h3 id="galleryTitle" class="text-3xl md:text-4xl font-bold text-glow-blue mb-4">Volunteer at Techacks4.0 36hrs Hackathon</h3>
-                            <p id="galleryDescription" class="text-text-subtle leading-relaxed">Contributed as a dedicated volunteer at the 36-hour Techacks4.0 hackathon.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="py-24 text-center overflow-hidden">
-            <div class="container mx-auto px-6 md:px-10 lg:px-16 space-y-4">
-                <h3 class="text-4xl font-bold" data-aos="fade-up" data-hoverable>Thank you for viewing!</h3>
-                <p class="text-text-subtle" data-aos="fade-up" data-aos-delay="100" data-hoverable>Stay in touch.</p>
-                <div class="flex justify-center space-x-6 text-glow-blue font-bold" data-aos="fade-up" data-aos-delay="200">
-                    <a href="https://github.com/Aryan-verma-ai" class="hover:text-white transition-colors duration-200" data-hoverable>GitHub</a>
-                    <a href="https://www.linkedin.com/in/aryan-verma-638594320/" class="hover:text-white transition-colors duration-200" data-hoverable>LinkedIn</a>
-                    <a href="https://www.instagram.com/tf.aryannnnnnn/?next=%2F" class="hover:text-white transition-colors duration-200" data-hoverable>Instagram</a>
-                </div>
-                <img src="./images/avatar1.png" alt="Avatar" class="mx-auto mt-8 w-32 h-32 max-w-full object-contain rounded-full" data-aos="zoom-in" data-aos-delay="300" data-hoverable/>
-            </div>
-        </footer>
-
     </main>
 
-    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden backdrop-filter backdrop-blur-md bg-black/60">
-        <div class="relative w-full max-w-4xl mx-4 bg-ui-bg rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]">
-            <button id="close-modal" class="absolute top-4 right-4 text-text-light hover:text-white text-3xl font-bold z-20" data-hoverable>&times;</button>
-            <div class="p-8 space-y-6">
-                <img id="modal-image" src="" alt="Project Image" class="w-full h-auto rounded-lg mb-4 border border-white/10">
-                <div class="space-y-4">
-                    <h3 id="modal-title" class="text-4xl font-bold text-glow-blue"></h3>
-                    <p id="modal-description" class="text-text-subtle leading-relaxed"></p>
-                </div>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 text-glow-blue font-bold text-lg pt-4">
-                    <a id="modal-github" href="#" target="_blank" class="hover:text-white transition-colors duration-200" data-hoverable>GitHub Repo</a>
-                    <a id="modal-live" href="#" target="_blank" class="hover:text-white transition-colors duration-200" data-hoverable>Live Demo</a>
-                </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© <span id="year"></span> <span class="foot-name">Aryan Verma</span>. Built with care, coffee and a lot of console.logs.</p>
+        </div>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+    <div id="project-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <img id="modal-image" src="" alt="Project" class="modal-image">
+            <h2 id="modal-title" class="modal-title"></h2>
+            <p id="modal-description" class="modal-description"></p>
+            <div class="modal-links">
+                <a id="modal-github" href="#" class="btn btn-outline" target="_blank">GitHub Repo</a>
+                <a id="modal-live" href="#" class="btn btn-primary" target="_blank">Live Demo</a>
             </div>
         </div>
     </div>
 
-    <div id="certificate-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden backdrop-filter backdrop-blur-md bg-black/60">
-        <div class="relative w-full max-w-3xl mx-4 bg-ui-bg rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]">
-            <button id="close-certificate-modal" class="absolute top-4 right-4 text-text-light hover:text-white text-3xl font-bold z-20" data-hoverable>&times;</button>
-            <div class="p-8 space-y-6">
-                <img id="certificate-modal-image" src="" alt="Certificate" class="w-full h-auto rounded-lg mb-4 border border-white/10">
-                <div class="space-y-2">
-                    <h3 id="certificate-modal-title" class="text-3xl font-bold text-glow-blue"></h3>
-                    <p id="certificate-modal-issuer" class="text-text-subtle"></p>
-                </div>
-                <a id="certificate-modal-verify" href="#" target="_blank" class="inline-block text-glow-blue font-bold text-lg hover:text-white transition-colors duration-200" data-hoverable>Verify Credential</a>
-            </div>
+    <!-- CERTIFICATE MODAL -->
+    <div id="certificate-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <button id="close-certificate-modal" class="close-btn">&times;</button>
+            <img id="certificate-modal-image" src="" alt="Certificate" class="modal-image">
+            <h2 id="certificate-modal-title" class="modal-title"></h2>
+            <p id="certificate-modal-issuer" class="modal-description"></p>
+            <a id="certificate-modal-verify" href="#" class="btn btn-primary" target="_blank">Verify Credential</a>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        duration: 1000,
-        once: false,
-        mirror: true,
-      });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
